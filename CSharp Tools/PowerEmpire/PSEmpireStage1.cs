@@ -5,8 +5,8 @@ Website: https://plaintext.do
 
 Compile: csc.exe PSEmpireStage1.cs /reference:C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Management.Automation\v4.0_3.0.0.0__31bf3856ad364e35\System.Management.Automation.dll
 
-Usage English: 	https://youtu.be/0jaC8156BEE
-Uso Español: 	https://youtu.be/la1fr4Mpj-4
+Usage English:	https://youtu.be/0jaC8156BEE
+Uso Español:	https://youtu.be/la1fr4Mpj-4
 */
 using System;
 using System.Collections.Generic;
