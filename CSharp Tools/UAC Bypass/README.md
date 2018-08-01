@@ -20,5 +20,5 @@ Usage:		`uac_bypass_xx.exe C:\Path\To\Payload.exe`
 
 # Video PoC
 
-{% include video id="sY0xXTxNkqY" provider="youtube" %}
+https://youtu.be/sY0xXTxNkqY
 
