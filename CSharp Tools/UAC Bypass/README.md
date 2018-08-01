@@ -14,9 +14,9 @@ Usage:		`uac_bypass_xx.exe C:\Path\To\Payload.exe`
 
 # Techniques implemented
 
-*UAC Bypass fodhelper
-*UAC Bypass computerdefaults
-*UAC Bypass silentcleanup
+* UAC Bypass fodhelper
+* UAC Bypass computerdefaults
+* UAC Bypass silentcleanup
 
 # Video PoC
 
