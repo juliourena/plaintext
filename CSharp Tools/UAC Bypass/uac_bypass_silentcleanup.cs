@@ -5,6 +5,8 @@ Website: https://plaintext.do
 
 Compile: csc.exe uac_bypass_silentcleanup.cs
 Usage: uac_bypass_silentcleanup.exe C:\Path\To\Payload.exe
+
+Credits: The code is based on [rootm0s](https://github.com/rootm0s) python implementation. If you want to know more about his job and the methods he used, you can find his GitHub in here: [https://github.com/rootm0s/WinPwnage](https://github.com/rootm0s/WinPwnage)
 */
 
 using System;
