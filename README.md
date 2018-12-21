@@ -2,7 +2,7 @@
 
 Here you will find some of the things that I have worked or am investigating.
 
-* **CVEs - PoC**
+* **CVE's - PoC**
 	* [CVE-2018-13374](https://github.com/juliourena/plaintext/tree/master/CVE-PoC)
 
 * **CSharp Tools (C#)**
