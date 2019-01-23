@@ -21,7 +21,7 @@ class MetasploitModule < Msf::Exploit::Remote
         [
           'modpr0be',  #Initial discovery, PoC (Tom Gregory)
           'sinn3r',     #Metasploit
-	  'PlainText'	#Modulo para DropZone
+		  'PlainText'	#Modulo para DropZone
         ],
       'Payload'        =>
         {
