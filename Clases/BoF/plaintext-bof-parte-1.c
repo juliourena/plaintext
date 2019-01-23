@@ -1,5 +1,9 @@
 //vuln.c
 /*
+Publicado por Julio Ureña (PlainText)
+Twitter: @JulioUrena
+Video: https://youtu.be/7KZ5LCFr6Sw
+
 Install 32 bits libraries for 64 bit system
 apt-get install gcc-multilib
 
