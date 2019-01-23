@@ -2,6 +2,9 @@
 
 Here you will find some of the things that I have worked or am investigating.
 
+* **CVE's - PoC**
+	* [CVE-2018-13374](https://github.com/juliourena/plaintext/tree/master/CVE-PoC)
+
 * **CSharp Tools (C#)**
 	* [PowerEmpire](https://github.com/juliourena/plaintext/tree/master/CSharp%20Tools/PowerEmpire)
 	* [UAC Bypass](https://github.com/juliourena/plaintext/tree/master/CSharp%20Tools/UAC%20Bypass)
