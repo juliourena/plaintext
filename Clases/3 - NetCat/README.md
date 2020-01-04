@@ -1,3 +1,6 @@
+### Descargar Netcat
+	https://eternallybored.org/misc/netcat/
+
 ### Conexion a puertos
 	Servidor
 	nc -lvp 1000
