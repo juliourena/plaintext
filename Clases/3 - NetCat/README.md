@@ -1,3 +1,6 @@
+### Descargar Netcat para Windows
+	https://eternallybored.org/misc/netcat/
+
 ### Conexion a puertos
 	Servidor
 	nc -lvp 1000
@@ -51,8 +54,8 @@
 	nc -lvnp 2000
 	
 	
-### python tty 
-	python -c "import tty;tty.spawn('/bin/bash')"
+### python pty 
+	python -c "import pty;pty.spawn('/bin/bash')"
 	CTRL + Z
 	stty raw -echo
 	fg
