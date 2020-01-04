@@ -13,12 +13,12 @@
 
 ### Conectar a una Web
 	nc -v plaintext.do 80
-	GET / HTTP/1.1
+	GET / HTTP/1.1 
 	
 ### Escaneo de puertos 
 	nc -z -vv plaintext.do 78-81
 	nc -z -vv 185.199.109.153 78-81
-	nc -z -vvn 185.199.109.153 78-81 | evitar inverse host lookup
+	nc -z -vvn 185.199.109.153 78-81 # evitar inverse host lookup
 	
 ### Transferencia de archivos
 	Para Recibir 
