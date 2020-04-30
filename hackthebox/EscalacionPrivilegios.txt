@@ -1,0 +1,50 @@
+Forest - Active Directory 
+Bastion / Arkham
+	- Archivos de Backup - dir /s *backup*
+	- https://raw.githubusercontent.com/ihack4falafel/OSCP/master/Windows/WinPrivCheck.bat
+Access
+	- Saved Credentials
+		[void][Windows.Security.Credentials.PasswordVault,Windows.Security.Credentials,ContentType=WindowsRuntime]
+		$vault = New-Object Windows.Security.Credentials.PasswordVault
+		$vault.RetrieveAll() | % { $_.RetrievePassword();$_ }
+Active
+	- Kerberoasting 
+		○ https://0xdf.gitlab.io/2018/12/08/htb-active.html#kerberoasting
+
+Bounty / Optimum / Bastard
+	- Escalación de Privilegios con vulnerabilidad de sistema operativo
+	
+JSON
+	- Abuso de Privilegios (SeImpersonatePrivilege)
+	- JuicyPotato
+
+Querier
+	- Modifiable Service Abuse
+	- https://0xdf.gitlab.io/2019/06/22/htb-querier.html
+
+Chatterbox
+	- Credentials AutoLogon
+
+Jeeeves - Cracking Passwords
+	- KeepPass
+
+Silo
+	- Memdump
+
+Giddy
+	- Vulnerabilidades en software instalados. 
+
+Reel
+	- Archivo con password
+	- BloodHound abuso privilegios tom > claire
+	- Claire to BackupGroup
+	- Archivo con Password 
+
+Rabbit
+	- Services (Apache) running as system
+	- UAC Bypass
+
+
+SecNotes
+	- Bash (linux in Windows) found files with passwords.
+This is not the typical case for Privilege Escalation
