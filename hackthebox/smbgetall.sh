@@ -5,14 +5,15 @@
 
 username=$1
 password=$2
+ip=$3
 
 mkdir $username 
 cd $username
 
-for share in $(smbmap -u "$username" -p "$password" -H 10.10.10.178 | grep -i READ | cut -d$'\t' -f2)
+for share in $(smbmap -u "$username" -p "$password" -H "$ip" | grep -i READ | cut -d$'\t' -f2)
 do
 	mkdir $share
 	cd $share
-	smbclient -U $username%$password //10.10.10.178/$share -c 'prompt OFF; recurse ON;mget *'
+	smbclient -U $username%$password //"$ip"/$share -c 'prompt OFF; recurse ON;mget *'
 	cd ..
 done
