@@ -38,7 +38,7 @@ try:
 		print("[+] Package information: ")
 		print("[+] Name: " + course["attributes"]["Package"])
 		print("[+] Price: " + course["priceMoney"]["currency"] + " " + course["priceMoney"]["value"])
-		if (course["qtyInStock"] == "0"):
+		if (course["qtyInStock"] == 0):
 			print("[+] Available: ",colored('No :(','red'))
 		else:
 			print("[+] Available: ",colored('YES!!! run!! buy it!!','green'))
