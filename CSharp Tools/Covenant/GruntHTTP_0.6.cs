@@ -230,7 +230,7 @@ namespace GruntExecutor
 
         private static IntPtr TaskExecute(TaskingMessenger messenger, GruntTaskingMessage message)
         {
-												 
+			const int MAX_MESSAGE_SIZE = 1048576;									 
             string output = "";
             try
             {
@@ -318,7 +318,7 @@ namespace GruntExecutor
                     GruntTaskingMessageResponse response = new GruntTaskingMessageResponse(GruntTaskingStatus.Completed, "Task Exception: " + e.Message + Environment.NewLine + e.StackTrace);
                     messenger.QueueTaskingMessage(response.ToJson(), message.Name);
                 }
-                catch (Exception) { }			 
+                catch (Exception) { }
             }
             finally
             {
@@ -638,6 +638,10 @@ namespace GruntExecutor
         public void Close()
         {
             lock (this._PipeLock)
+			 
+								  
+			 
+								   
             {
                 try
                 {
@@ -742,7 +746,7 @@ namespace GruntExecutor
                 newServerPipe.WaitForConnection();
                 this.Pipe = newServerPipe;
                 // Tell the parent Grunt the GUID so that it knows to which child grunt which messages shall be forwarded. Without this message, any further communication breaks.
-                this.Messenger.WriteTaskingMessage("");
+                this.Messenger.WriteTaskingMessage();
             }
         }
     }
