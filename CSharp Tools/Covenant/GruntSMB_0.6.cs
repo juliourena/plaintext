@@ -741,7 +741,7 @@ namespace GruntExecutor
                 newServerPipe.WaitForConnection();
                 this.Pipe = newServerPipe;
                 // Tell the parent Grunt the GUID so that it knows to which child grunt which messages shall be forwarded. Without this message, any further communication breaks.
-                this.Messenger.WriteTaskingMessage("");
+                this.Messenger.WriteTaskingMessage();
             }
         }
     }
