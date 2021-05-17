@@ -4,8 +4,12 @@
     Name: Julio Urena
     Handle: plaintext
     Link: https://twitter.com/JulioUrena
-  Description: MSSQL Query Commands, you can use ! to run multiples commands at once. Keep it mind you won't be able to use ! for other things. 
-  Help: 
+  Description: MSSQL Query Commands
+  Help: >-
+    Example:
+
+
+    SQLQuery /sqlserver:"SQLSERVER01" /query:"SELECT SUSER_NAME()!EXECUTE AS LOGIN = 'sa'!SELECT SUSER_NAME()"
   Language: CSharp
   CompatibleDotNetVersions:
   - Net35
