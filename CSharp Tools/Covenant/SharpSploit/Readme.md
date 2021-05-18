@@ -21,6 +21,8 @@ sudo wget https://raw.githubusercontent.com/juliourena/plaintext/master/CSharp%2
 
 cd /opt/Covenant/Covenant/Data/ReferenceSourceLibraries/SharpSploit/SharpSploit/Misc/
 
+sudo rm Utilities.cs
+
 sudo wget https://raw.githubusercontent.com/juliourena/plaintext/master/CSharp%20Tools/Covenant/SharpSploit/Utilities.cs
 
 cd /opt/Covenant/Covenant/ 
