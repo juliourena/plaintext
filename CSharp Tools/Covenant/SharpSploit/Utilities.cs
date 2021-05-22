@@ -1,4 +1,4 @@
-﻿// Author: Ryan Cobb (@cobbr_io)
+// Author: Ryan Cobb (@cobbr_io)
 // Project: SharpSploit (https://github.com/cobbr/SharpSploit)
 // License: BSD 3-Clause
 
@@ -8,6 +8,10 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
+
+/// <summary>
+/// Old Utilities using for SharpShell and PassTheHash
+/// </summary>
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -113,19 +117,37 @@ namespace SharpSploit.Misc
             get { return IntPtr.Size == 8; }
         }
 
+        public static string ConvertFileLengthForDisplay(long size)
+        {
+            string result = size.ToString();
+
+            if (size < 1024) { result = $"{size}b"; }
+            else if (size > 1024 && size <= 1048576) { result = $"{size / 1024}kb"; }
+            else if (size > 1048576 && size <= 1073741824) { result = $"{size / 1048576}mb"; }
+            else if (size > 1073741824 && size <= 1099511627776) { result = $"{size / 1073741824}gb"; }
+            else if (size > 1099511627776) { result = $"{size / 1099511627776}tb"; }
+
+            return result;
+        }
+
+
+		/// <summary>
+        /// Old Utilities for SharpShell and PassTheHash
+        /// </summary>
         public static ushort DataLength(int length_start, byte[] string_extract_data)
         {
             byte[] bytes = { string_extract_data[length_start], string_extract_data[length_start + 1] };
             ushort string_length = BitConverter.ToUInt16(GetByteRange(string_extract_data, length_start, length_start + 1), 0);
             return string_length;
         }
+
         public static byte[] GetByteRange(byte[] array, int start, int end)
         {
             var newArray = array.Skip(start).Take(end - start + 1).ToArray();
             return newArray;
         }
 
-        public static byte[] ConvertStringToByteArray(string hex)
+		public static byte[] ConvertStringToByteArray(string hex)
         {
             return Enumerable.Range(0, hex.Length)
                              .Where(x => x % 2 == 0)
@@ -146,5 +168,7 @@ namespace SharpSploit.Misc
 
             return byte_Array;
         }
+
+
     }
 }
