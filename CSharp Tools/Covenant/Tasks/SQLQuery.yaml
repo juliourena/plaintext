@@ -1,9 +1,9 @@
-- Name: SQLQuery
-  Aliases: []
-  Author:
+- Author:
     Name: Julio Urena
     Handle: plaintext
     Link: https://twitter.com/JulioUrena
+  Name: SQLQuery
+  Aliases: []
   Description: MSSQL Query Commands
   Help: >-
     Example:
@@ -14,46 +14,80 @@
   CompatibleDotNetVersions:
   - Net35
   - Net40
-  Code: "using System;\nusing System.IO;\nusing System.Text;\nusing System.Data.SqlClient;\n\npublic static class Task\n{\n    public static string Execute(string SqlServer, string Query, string Database = \"\")\n		{\n			StringBuilder results = new StringBuilder();\n			string conString = \"Server = \" + SqlServer + \"; Database = \" + Database + \"; Integrated Security = True;\";\n			SqlConnection con = new SqlConnection(conString);\n			try\n			{\n				con.Open();\n				results.Append(\"Auth success!\");\n				results.AppendLine();\n			}\n			catch\n			{\n				return \"Auth failed\";\n			}\n			try\n			{\n				string[] queries = Query.Split('!');\n\n				SqlCommand command;\n				SqlDataReader reader;\n\n				foreach (string q in queries)\n				{\n					command = new SqlCommand(q, con);\n					reader = command.ExecuteReader();\n					//reader.Close();\n\n					if (reader.HasRows)\n					{\n						while (reader.Read())\n						{\n							for (int i = 0; i < reader.FieldCount; i++)\n							{ \n								results.Append(reader.GetValue(i) + \" \");\n							}\n							results.AppendLine();\n						}\n					}\n					else\n					{\n						//results.Append(\"No rows found.\");\n						results.AppendLine();\n					}\n					reader.Close();\n				}\n				\n				con.Close();\n				return results.ToString();\n			}\n			catch (Exception e)\n			{\n				results.AppendLine();\n				results.Append(e.Message);\n				return results.ToString();\n			}\n	}\n}"
+  Code: >-
+    using System;
+
+    using System.IO;
+
+    using System.Text;
+
+    using System.Data.SqlClient;
+
+
+    public static class Task
+
+    {
+        public static string Execute(string SqlServer, string Query, string Database = "")
+    		{
+    			StringBuilder results = new StringBuilder();
+    			string conString = "Server = " + SqlServer + "; Database = " + Database + "; Integrated Security = True;";
+    			SqlConnection con = new SqlConnection(conString);
+    			try
+    			{
+    				con.Open();
+    				results.Append("Auth success!");
+    				results.AppendLine();
+    			}
+    			catch
+    			{
+    				return "Auth failed";
+    			}
+    			try
+    			{
+    				string[] queries = Query.Split('!');
+
+    				SqlCommand command;
+    				SqlDataReader reader;
+
+    				foreach (string q in queries)
+    				{
+    					command = new SqlCommand(q, con);
+    					reader = command.ExecuteReader();
+    					//reader.Close();
+
+    					if (reader.HasRows)
+    					{
+    						while (reader.Read())
+    						{
+    							for (int i = 0; i < reader.FieldCount; i++)
+    							{ 
+    								results.Append(reader.GetValue(i) + " ");
+    							}
+    							results.AppendLine();
+    						}
+    					}
+    					else
+    					{
+    						results.AppendLine();
+    					}
+    					reader.Close();
+    				}
+    				
+    				con.Close();
+    				return results.ToString();
+    			}
+    			catch (Exception e)
+    			{
+    				results.AppendLine();
+    				results.Append(e.Message);
+    				return results.ToString();
+    			}
+    	}
+    }
+  Compiled: false
   TaskingType: Assembly
-  UnsafeCompile: false
-  TokenTask: false
-  Options:
-  - Name: SqlServer
-    Value: ''
-    DefaultValue: ''
-    Description: Target MSSQL Server
-    SuggestedValues: []
-    Optional: false
-    DisplayInCommand: true
-    FileOption: false
-  - Name: Query
-    Value: ''
-    DefaultValue: ''
-    Description: 'Query to execute on the server and database selected. '
-    SuggestedValues: []
-    Optional: false
-    DisplayInCommand: true
-    FileOption: false
-  - Name: Database
-    Value: ''
-    DefaultValue: master
-    Description: 'Database to run the query against '
-    SuggestedValues: []
-    Optional: true
-    DisplayInCommand: true
-    FileOption: false
   ReferenceSourceLibraries: []
   ReferenceAssemblies:
-  - Name: System.Data.dll
-    Location: net40/System.Data.dll
-    DotNetVersion: Net40
-  - Name: mscorlib.dll
-    Location: net40/mscorlib.dll
-    DotNetVersion: Net40
-  - Name: System.dll
-    Location: net40/System.dll
-    DotNetVersion: Net40
   - Name: System.Data.dll
     Location: net35/System.Data.dll
     DotNetVersion: Net35
@@ -63,4 +97,43 @@
   - Name: System.dll
     Location: net35/System.dll
     DotNetVersion: Net35
+  - Name: System.Data.dll
+    Location: net40/System.Data.dll
+    DotNetVersion: Net40
+  - Name: mscorlib.dll
+    Location: net40/mscorlib.dll
+    DotNetVersion: Net40
+  - Name: System.dll
+    Location: net40/System.dll
+    DotNetVersion: Net40
   EmbeddedResources: []
+  UnsafeCompile: false
+  TokenTask: false
+  Options:
+  - Name: SqlServer
+    Value: localhost
+    DefaultValue: ''
+    Description: Target MSSQL Server
+    SuggestedValues: []
+    Optional: false
+    DisplayInCommand: true
+    FileOption: false
+    GruntTaskId: 103
+  - Name: Query
+    Value: 
+    DefaultValue: ''
+    Description: 'Query to execute on the server and database selected. '
+    SuggestedValues: []
+    Optional: false
+    DisplayInCommand: true
+    FileOption: false
+    GruntTaskId: 103
+  - Name: Database
+    Value: ''
+    DefaultValue: master
+    Description: 'Database to run the query against '
+    SuggestedValues: []
+    Optional: true
+    DisplayInCommand: true
+    FileOption: false
+    GruntTaskId: 103
