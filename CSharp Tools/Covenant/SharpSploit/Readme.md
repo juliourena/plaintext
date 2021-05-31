@@ -4,7 +4,9 @@ cd /opt
 sudo git clone--recurse-submodules https://github.com/cobbr/Covenant --brach dev Covenant-dev
 ```
 ### SharpSploit 
-#### We'll use ShareSploit pth branch to include lateral movement for WMI & SMB using hashes. In order to keep SharpSploit version up to date we need to replace/add part of this code to some locations.
+#### We'll use SharpSploit pth branch to include lateral movement for WMI & SMB using hashes. In order to keep SharpSploit version up to date we need to replace/add part of this code to some locations.
+
+#### SharpSploit's lastest Mimikatz update has some random errors, so I used the old classes and create a Task that consume the old method to run Mimikatz. (MimikatzOld.cs / PEOld.cs)
 
 ```
 cd /opt/Covenant-dev/Covenant/Data/ReferenceSourceLibraries/SharpSploit/SharpSploit/LateralMovement/
