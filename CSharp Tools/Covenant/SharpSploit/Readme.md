@@ -1,7 +1,7 @@
 ### Clone repository and assign a name
 ```
 cd /opt
-sudo git clone--recurse-submodules https://github.com/cobbr/Covenant --brach dev Covenant-dev
+sudo git clone --recurse-submodules https://github.com/cobbr/Covenant --brach dev Covenant-dev
 ```
 ### SharpSploit 
 #### We'll use SharpSploit pth branch to include lateral movement for WMI & SMB using hashes. In order to keep SharpSploit version up to date we need to replace/add part of this code to some locations.
