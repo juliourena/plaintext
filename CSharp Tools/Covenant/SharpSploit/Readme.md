@@ -9,11 +9,11 @@ sudo git clone --recurse-submodules https://github.com/cobbr/Covenant --branch d
 #### SharpSploit's lastest Mimikatz update has some random errors, so I used the old classes and create a Task that consume the old method to run Mimikatz. (MimikatzOld.cs / PEOld.cs)
 
 ```
-cd /opt/Covenant-dev/Covenant/Data/ReferenceSourceLibraries/SharpSploit/SharpSploit/LateralMovement/
+cd /opt/Covenant/Covenant/Data/ReferenceSourceLibraries/SharpSploit/SharpSploit/LateralMovement/
 
 sudo wget https://raw.githubusercontent.com/juliourena/plaintext/master/CSharp%20Tools/Covenant/SharpSploit/PassTheHash.cs
 
-cd /opt/Covenant-dev/Covenant/Data/ReferenceSourceLibraries/SharpSploit/SharpSploit/Execution/
+cd /opt/Covenant/Covenant/Data/ReferenceSourceLibraries/SharpSploit/SharpSploit/Execution/
 
 sudo mkdir PassTheHash && cd PassTheHash
 
@@ -21,11 +21,9 @@ sudo wget https://raw.githubusercontent.com/juliourena/plaintext/master/CSharp%2
 
 sudo wget https://raw.githubusercontent.com/juliourena/plaintext/master/CSharp%20Tools/Covenant/SharpSploit/PassTheHash/SMBExec.cs
 
-cd /opt/Covenant-dev/Covenant/Data/ReferenceSourceLibraries/SharpSploit/SharpSploit/Misc/
+cd /opt/Covenant/Covenant/Data/ReferenceSourceLibraries/SharpSploit/SharpSploit/Misc/
 
-sudo rm Utilities.cs
-
-sudo wget https://raw.githubusercontent.com/juliourena/plaintext/master/CSharp%20Tools/Covenant/SharpSploit/Utilities.cs
+sudo wget https://raw.githubusercontent.com/juliourena/plaintext/master/CSharp%20Tools/Covenant/SharpSploit/Utilities.cs -O Utilities.cs
 
 cd /opt/Covenant-dev/Covenant/Data/ReferenceSourceLibraries/SharpSploit/SharpSploit/Execution/
 
