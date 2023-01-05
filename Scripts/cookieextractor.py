@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Sample Script to extract cookies offile from FireFox sqlite database 
-# Create by PlainText 
+# Created by PlainText 
 
 import argparse
 import sqlite3
