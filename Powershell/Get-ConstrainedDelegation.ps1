@@ -1,69 +1,85 @@
 function Get-ConstrainedDelegation {
+<#
+.SYNOPSIS
+User PowerView to check for Orphaned SPNs.
+
+Author: Julio Ureña (@JulioUrena)
+License: 
+Required Dependencies: Powerview.ps1
+Optional Dependencies: None
+
+.PARAMETER Command
+ 
+.EXAMPLE
+Get-ConstrainedDelegation -CheckOrphaned
+#>
     [CmdletBinding()]
     param (
-        [string]$ComputerName,
         [switch]$CheckOrphaned
     )
 
     process {
+        $global:outputCollection = @()
 
-    # Check if PowerView module is loaded
-    if (-not (Get-Command Get-DomainComputer -ErrorAction SilentlyContinue)) {
-        Write-Host "PowerView module is not loaded. Please load the module and try again." -ForegroundColor Red
-        return
-    }
+        # Buscar computadoras y usuarios con delegación restringida
+        $computerDelegations = Get-DomainComputer -TrustedToAuth
+        $userDelegations = Get-DomainUser -TrustedToAuth
 
-    try {
-        $outputCollection = @()
-        $computers = if ($ComputerName) {
-            @(Get-DomainComputer -Identity $ComputerName)
+        # Procesar computadoras
+        foreach ($computer in $computerDelegations) {
+            ProcessDelegation -Object $computer -Type 'Computer'
+        }
+
+        # Procesar usuarios
+        foreach ($user in $userDelegations) {
+            ProcessDelegation -Object $user -Type 'User'
+        }
+
+        # Mostrar resultados
+        if ($outputCollection.Count -gt 0) {
+            $outputCollection | Format-Table -AutoSize
         } else {
-            Get-DomainComputer -TrustedToAuth
-        }
-
-        foreach ($computer in $computers) {
-            $delegationSPNs = $computer.'msds-allowedtodelegateto'
-            if ($delegationSPNs) {
-                $orphanedSPNs = @()
-                foreach ($spn in $delegationSPNs) {
-                    $target = $spn.Split('/')[1].Split('.')[0]
-                    if ($CheckOrphaned) {
-                        if (-not (Test-ComputerExistence -ComputerName $target)) {
-                            $orphanedSPNs += $spn
-                        }
-                    } else {
-                        $outputCollection += [PSCustomObject]@{
-                            ComputerName = $computer.Name
-                            TargetServer = $target
-                            SPN = $spn
-                        }
-                    }
-                }
-
-                if ($CheckOrphaned -and $orphanedSPNs) {
-                    foreach ($spn in $orphanedSPNs) {
-                        $outputCollection += [PSCustomObject]@{
-                            ComputerName = $computer.Name
-                            TargetServer = ($spn.Split('/')[1].Split('.')[0])
-                            SPN = $spn
-                        }
-                    }
-                }
-            }
-        }
-
-        $outputCollection | Format-Table -AutoSize
-        } catch {
-            Write-Error "An error occurred: $_"
+            Write-Host "No se encontraron objetos con delegación restringida." -ForegroundColor Green
         }
     }
 }
 
-function Test-ComputerExistence {
+function ProcessDelegation {
     param (
-        [string]$ComputerName
+        [Parameter(Mandatory=$true)]$Object,
+        [Parameter(Mandatory=$true)][string]$Type
     )
-    # Replace the Get-DomainComputer cmdlet with the correct method to check computer existence in your environment
-    $computer = Get-DomainComputer -Identity $ComputerName -ErrorAction SilentlyContinue
-    return $null -ne $computer
+
+    $delegationSPNs = $Object.'msds-allowedtodelegateto'
+    if ($delegationSPNs) {
+        foreach ($spn in $delegationSPNs) {
+            $target = $spn.Split('/')[1].Split('.')[0]
+
+            if ($CheckOrphaned -and -not (Test-ObjectExistence -Name $target)) {
+                $global:outputCollection += [PSCustomObject]@{
+                    Type = $Type
+                    Name = $Object.Name
+                    Target = $target
+                    SPN = $spn
+                }
+            } 
+
+            if (!$CheckOrphaned){
+                $global:outputCollection += [PSCustomObject]@{
+                    Type = $Type
+                    Name = $Object.Name
+                    Target = $target
+                    SPN = $spn
+                }
+            }
+
+            
+        }
+    }
+}
+
+function Test-ObjectExistence {
+    param ([string]$Name)
+    $exists = Get-DomainObject -Identity $Name -ErrorAction SilentlyContinue
+    return $null -ne $exists
 }
