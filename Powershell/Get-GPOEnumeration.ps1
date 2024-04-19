@@ -22,10 +22,12 @@ This function requires PowerView to be loaded as it utilizes its cmdlets to quer
 
     # Check if PowerView module is imported
     Try {
-        Get-Command Get-Domain 
+        # Attempt to get the 'Get-Domain' command and stop if not found
+        $null = Get-Command Get-Domain -ErrorAction Stop
     }
     Catch {
-        Write-Error "PowerView is not imported in the current session. Ensure it is imported before continue."
+        # Error handling if PowerView is not loaded
+        Write-Warning "PowerView is not imported in the current session. Ensure it is imported before continuing."
         Return
     }
 
