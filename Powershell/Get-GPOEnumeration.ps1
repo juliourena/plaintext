@@ -20,12 +20,12 @@ This function requires PowerView to be loaded as it utilizes its cmdlets to quer
     [CmdletBinding()]
     Param()
 
-    # Import PowerView module
+    # Check if PowerView module is imported
     Try {
-        . .\PowerView.ps1
+        Get-Command Get-Domain 
     }
     Catch {
-        Write-Error "Failed to import PowerView. Ensure it is in the current directory."
+        Write-Error "PowerView is not imported in the current session. Ensure it is imported before continue."
         Return
     }
 
@@ -65,20 +65,20 @@ This function requires PowerView to be loaded as it utilizes its cmdlets to quer
         $allOUs = Get-DomainOU
 
         # Check if linked at the Domain level
-        if ($DomainGPLink -and $DomainGPLink -like "*[{$($GPO.Guid)}]*") {
+        if ($DomainGPLink -like "*$($GPO.name)*") {
             $appliedScopes += "Domain: $($DomainObject.name)"
         }
 
         # Check if linked at Site level
         foreach ($site in $allSites) {
-            if ($site.gplink -and $site.gplink -like "*[{$($GPO.Guid)}]*") {
+            if ($site.gplink -like "*$($GPO.name)*") {
                 $appliedScopes += "Site: $($site.Name)"
             }
         }
 
         # Check if linked at OU level
         foreach ($ou in $allOUs) {
-            if ($ou.gplink -and $ou.gplink -like "*[{$($GPO.Guid)}]*") {
+            if ($ou.gplink -like "*$($GPO.name)*") {
                 $appliedScopes += "OU: $($ou.Name)"
             }
         }
