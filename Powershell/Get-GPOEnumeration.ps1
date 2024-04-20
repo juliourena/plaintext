@@ -35,24 +35,10 @@ This function requires PowerView to be loaded as it utilizes its cmdlets to quer
     $DomainObject = Get-DomainObject -SearchScope Base
     $DomainGPLink = $DomainObject.gplink
 
-    # Get SID for Domain Admins and Enterprise Admins
-    $domainAdminsSID = Get-DomainGroup "Domain Admins" -Properties objectSid | Select-Object -ExpandProperty objectSid
-    $enterpriseAdminsSID = Get-DomainGroup "Enterprise Admins" -Properties objectSid | Select-Object -ExpandProperty objectSid
-
-    # Define excluded SIDs
-    $excludedSIDs = @(
-        "S-1-5-18",   # Local System
-        "S-1-5-9",    # Enterprise Domain Controllers
-        "S-1-5-11",   # Authenticated Users
-        $domainAdminsSID,  # Domain Admins
-        $enterpriseAdminsSID   # Enterprise Admins
-    )
-
     # Retrieve GPO ACLs excluding certain SIDs
     $GPOAcls = Get-DomainGPO | Get-DomainObjectAcl | Where-Object {
         $_.ActiveDirectoryRights -match "CreateChild|WriteProperty|DeleteChild|DeleteTree|WriteDacl|WriteOwner" -and
-        -not ($excludedSIDs -contains $_.SecurityIdentifier) -and
-        $_.SecurityIdentifier -match "S-1-5-21-\d+-\d+-\d+-\d+$"
+        $_.SecurityIdentifier -match '^S-1-5-.*-[1-9]\d{3,}$'
     }
 
     $GPOAcls | ForEach-Object {
