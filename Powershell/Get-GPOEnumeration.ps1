@@ -192,11 +192,7 @@ This function requires PowerView to be loaded as it utilizes its cmdlets to quer
                 AppliedScopes = ($appliedScopes -join ', ')
                 ActiveDirectoryRights = $_.ActiveDirectoryRights
                 ObjectDN = $_.ObjectDN
-                AceType = $_.AceType
-                IsInherited = $_.IsInherited
-                InheritanceFlags = $_.InheritanceFlags
-                ObjectAceType = $_.ObjectAceType
-            } | Select-Object PrincipalName, GPOName, GPCFileSysPath, AppliedScopes, ActiveDirectoryRights, ObjectDN, AceType, IsInherited, InheritanceFlags, ObjectAceType
+            } | Select-Object PrincipalName, GPOName, GPCFileSysPath, AppliedScopes, ActiveDirectoryRights, ObjectDN
         }
     }
 }
